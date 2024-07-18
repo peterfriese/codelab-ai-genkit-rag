@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { retrieve } from '@genkit-ai/ai/retriever';
-import { prompt } from '@genkit-ai/dotprompt';
-import { defineFlow, run } from '@genkit-ai/flow';
+import {retrieve} from '@genkit-ai/ai/retriever';
+import {prompt} from '@genkit-ai/dotprompt';
+import {defineFlow, run} from '@genkit-ai/flow';
 
 import {
   Activity,
@@ -66,22 +66,22 @@ export const itineraryFlow = defineFlow(
   },
 
   async (tripDetails) => {
-    const imgDescription = '';
+    // const imgDescription = '';
     // TODO: 2. Replace the line above with this:
-    // const imgDescription = await run('imgDescription', async () => {
-    //   if (!tripDetails.imageUrls?.length) {
-    //     return '';
-    //   }
-    //   const imgDescription = await prompt('imgDescription');
-    //   const result = await imgDescription.generate({
-    //     input: { imageUrls: tripDetails.imageUrls },
-    //   });
-    //   return result.text();
-    // });
+    const imgDescription = await run('imgDescription', async () => {
+      if (!tripDetails.imageUrls?.length) {
+        return '';
+      }
+      const imgDescription = await prompt('imgDescription');
+      const result = await imgDescription.generate({
+        input: {imageUrls: tripDetails.imageUrls},
+      });
+      return result.text();
+    });
 
     const places = await run(
       'Retrieve matching places',
-      { imgDescription, request: tripDetails.request },
+      {imgDescription, request: tripDetails.request},
       async () => {
         const docs = await retrieve({
           retriever: placesRetriever,

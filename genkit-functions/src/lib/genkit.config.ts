@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-import { configureGenkit } from '@genkit-ai/core';
-import { dotprompt } from '@genkit-ai/dotprompt';
-import { firebase } from '@genkit-ai/firebase';
-import { vertexAI } from '@genkit-ai/vertexai';
+import {configureGenkit} from '@genkit-ai/core';
+import {dotprompt} from '@genkit-ai/dotprompt';
+import {firebase} from '@genkit-ai/firebase';
+import {vertexAI} from '@genkit-ai/vertexai';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  // ...
-  projectId: 'REPLACE_WITH_YOUR_PROJECT_ID',
-  // ...
+  apiKey: "AIzaSyBDACA5SUtzfogzv7ZxztusrfYJJfNfba8",
+  authDomain: "compass-codelab-c4f48.firebaseapp.com",
+  projectId: "compass-codelab-c4f48",
+  storageBucket: "compass-codelab-c4f48.appspot.com",
+  messagingSenderId: "128595439198",
+  appId: "1:128595439198:web:68ca4ae879b99a4a930ecf"
 };
 
 export const getProjectId = () => {
@@ -34,8 +37,8 @@ export const config = configureGenkit({
   plugins: [
     firebase({
       projectId: getProjectId(),
-      traceStore: { collection: 'traceStore' },
-      flowStateStore: { collection: 'flowTraceStore' },
+      traceStore: {collection: 'traceStore'},
+      flowStateStore: {collection: 'flowTraceStore'},
     }),
     vertexAI({
       projectId: getProjectId(),
